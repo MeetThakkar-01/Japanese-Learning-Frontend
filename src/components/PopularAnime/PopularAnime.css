@@ -1,0 +1,25 @@
+.popular-anime {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.popular-anime > hr {
+    width: 100px;
+    align-content: center;
+}
+
+.anime-grid {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+@media (min-width: 600px) {
+    .anime-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 900px) {
+    .anime-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+

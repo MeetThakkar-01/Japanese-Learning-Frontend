@@ -1,0 +1,67 @@
+.navbar {
+    background: rgb(205, 245, 255);
+  padding: 0.5rem 1rem;
+  display: flex;
+  /* grid-template-columns: auto 1fr; */
+  align-items: center;
+  height: 40px;
+  width: auto;
+  justify-content: space-between;
+}
+
+.logo {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: xx-large;
+    color: darkblue;
+
+}
+
+.nav-link {
+    padding: 10px;
+    color: grey;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all 0.3s linear;
+    
+  }
+  
+  .active {
+    color: greenyellow;
+  }
+
+.nav-links {
+    display: flex;
+    flex: 90%;
+    /* grid-template-columns: repeat(2, 1fr); */
+    justify-content: space-between;
+    text-align: center;
+  }
+
+.search > input {
+    border-radius: 5px;
+    height: auto;
+    width: 400px;
+}
+
+.search {
+  display: flex;
+}
+
+.nav-btn {
+    display: flex;
+}
+
+.btn {
+    font-size: medium;
+    padding: 5px 20px;
+    margin: 5px;
+    box-shadow: none;
+    border: 1.5px solid black;
+    cursor: pointer;
+}
+
+.btn :hover {
+  background-color: rgb(114, 138, 182);
+  
+}
