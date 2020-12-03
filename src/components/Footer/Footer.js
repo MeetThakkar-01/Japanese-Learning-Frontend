@@ -4,7 +4,34 @@ import "./Footer.css";
 function Footer() {
   return (
     <>
-      <div className="footer">This is Footer</div>
+      <footer className="pv4 ph3 ph5-m ph6-l footer">
+        <small className="f6 db tc">
+          © 2020 <b className="ttu">AnimeList</b>., All Rights Reserved
+        </small>
+        <div className="tc mt3">
+          <a
+            href="/language/"
+            title="Language"
+            className="f6 dib ph2 link mid-gray dim"
+          >
+            Language
+          </a>
+          <a
+            href="/terms/"
+            title="Terms"
+            className="f6 dib ph2 link mid-gray dim"
+          >
+            Terms of Use
+          </a>
+          <a
+            href="/privacy/"
+            title="Privacy"
+            className="f6 dib ph2 link mid-gray dim"
+          >
+            Privacy
+          </a>
+        </div>
+      </footer>
     </>
   );
 }
