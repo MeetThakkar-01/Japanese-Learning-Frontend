@@ -1,6 +1,19 @@
 .slide-img {
-    height: 40rem;
+    height: 25vh;
+    width: auto ;
     background-repeat: no-repeat;
-    /* background-position: center; */
-    background-size:cover ;
+    background-size:contain ;
+    background-position: center;
+    
 }
+
+@media (min-width: 768px) {
+    .slide-img { 
+        background-size:cover; 
+        height: 90vh;
+    }
+  }
+
+  /* @media (min-width: 900px) {
+    .slide-img { background-size:cover ; }
+  } */
