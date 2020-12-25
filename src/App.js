@@ -1,17 +1,20 @@
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
 import "react-slideshow-image/dist/styles.css";
-import Slideshow from "./components/SlideShow/Slideshow";
-import PopularAnime from "./components/PopularAnime/PopularAnime";
-import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home";
+// import Login from "./pages/Login";
+import { BrowserRouter, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Slideshow />
-      <PopularAnime />
-      <Footer />
+      <BrowserRouter>
+        <div>
+          <Navbar />
+          <Route path="/" exact component={Home} />
+          {/* <Route exact path="/login/" component={Login} /> */}
+        </div>
+      </BrowserRouter>
     </>
   );
 }

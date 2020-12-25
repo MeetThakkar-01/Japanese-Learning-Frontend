@@ -1,8 +1,9 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./Navbar.css";
+import GoogleAuth from "../GoogleAuth";
 
-export default function Navbar() {
+export default function Navbar({ auth }) {
   return (
     <nav className="navbar">
       <div className="logo">
@@ -13,8 +14,7 @@ export default function Navbar() {
         <input type="text" placeholder="Search Here..." />
       </div>
       <div className="nav-btn">
-        <button className="btn bg-white shadow-0 blue">LogIn</button>
-        <button className="btn bg-blue shadow-0 white">SignUp</button>
+        <GoogleAuth />
       </div>
     </nav>
   );
