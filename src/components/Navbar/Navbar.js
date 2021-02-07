@@ -6,9 +6,11 @@ import GoogleAuth from "../GoogleAuth";
 export default function Navbar({ auth }) {
   return (
     <nav className="navbar">
-      <div className="logo">
-        <p>AnimeList</p>
-      </div>
+      <a href="./" cla>
+        <div className="logo">
+          <p>AnimeList</p>
+        </div>
+      </a>
       <div className="search">
         <SearchIcon />
         <input type="text" placeholder="Search Here..." />
