@@ -15,6 +15,22 @@
     grid-gap: 1rem;
 }
 
+.search-loading {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+/*Show and hide*/
+.show {
+	display: inline-flex;
+}
+
+.hide {
+	display: none;
+}
+
 @media (min-width: 600px) {
     .anime-grid { grid-template-columns: repeat(2, 1fr); }
   }

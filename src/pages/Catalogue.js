@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchAnimeDetails } from "../actions/index";
+import Loader from "../images/Loader.gif";
 
 class Catalogue extends Component {
   componentDidMount() {
@@ -8,7 +9,7 @@ class Catalogue extends Component {
   }
 
   render() {
-    const { results } = this.props.data;
+    const { results, isLoading } = this.props.data;
     return (
       <>
         <div className="popular-anime pa2">
@@ -32,6 +33,14 @@ class Catalogue extends Component {
               </article>
             );
           })}
+
+          <div>
+            <img
+              src={Loader}
+              className={`search-loading ${isLoading ? "show" : "hide"} mv2`}
+              alt="loader"
+            />
+          </div>
         </div>
       </>
     );

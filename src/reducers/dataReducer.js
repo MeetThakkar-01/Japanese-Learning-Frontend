@@ -1,5 +1,6 @@
 var initState = {
   results: [],
+  isLoading: true,
 };
 
 const dataReducer = (state = initState, action) => {
@@ -8,6 +9,7 @@ const dataReducer = (state = initState, action) => {
       return {
         ...state,
         results: action.payload,
+        isLoading: false,
       };
     default:
       return state;
