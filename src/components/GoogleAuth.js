@@ -40,7 +40,7 @@ export class GoogleAuth extends Component {
         <div className="flex items-center">
           <button
             onClick={this.handleSignOutClick}
-            className="ui red google button"
+            className="ui red google button ph3 pv2 mb2"
           >
             <i className="google icon"></i>
             SignOut
