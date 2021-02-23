@@ -1,9 +1,11 @@
 div.anime-information {
-    border: 1px solid #ebebeb;
+    margin-top: 5vh;
+    /* border: 1px solid blue; */
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
+    width: auto;
 }
 
 div.anime-information h2.title {
@@ -12,18 +14,20 @@ div.anime-information h2.title {
 
 div.anime-information div.container {
     align-items: flex-start;
-    border: 0px solid #ebebeb;
+    /* border: 0px solid #ebebeb; */
     border-width: 1px 0;
     display: flex;
     flex-basis: 100%;
     flex-direction: row;
     padding: 0 100px;
+    flex-wrap: wrap;
+    /* width: 5vw */
 }
 
 .content-container {
-    border: 1px solid #ebebeb;
-    width: 100%;
-    height: 100%;
+    /* border: 1px solid #ebebeb; */
+    width: 60vw;
+    height: auto;
     padding: 10px;
     text-align: left;
 }
@@ -33,7 +37,7 @@ div.anime-information div.container {
 }
 
 .information-container {
-    border: 1px solid #ebebeb;
+    /* border: 1px solid #ebebeb; */
     padding: 10px;
 }
 
@@ -53,7 +57,7 @@ div.anime-information div.container {
     text-align: left;
 }
 .chart {
-    width: 100%;
+    width: auto;
 }
 
 .anime-grid {

@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Profile() {
   return (
-    <div className="flex items-center justify-center pa3">
-      <div class="center bg-white br3 pa3 pa4-ns mv3 w-50">
+    <div className="flex flex-wrap items-center justify-center pa3">
+      <div class="center bg-white br3 pa3 pa4-ns mv3 w-50 w-auto-m">
         <div className=" flex flex-column items-center justify-center">
           <div className="tc">
             <img
@@ -31,7 +31,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <div className="center bg-white br3 pa3 pa4-ns mv3 w-50">
+      <div className="center bg-white br3 pa3 pa4-ns mv3 w-auto">
         <form class="pa4 black-80">
           <div class="measure">
             <label for="name" class="f6 b db mb2">
