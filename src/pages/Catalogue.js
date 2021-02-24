@@ -3,15 +3,25 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchAnimeDetails } from "../actions/index";
 import Loader from "../images/Loader.gif";
+import Pagination from "../components/Pagination";
 
 class Catalogue extends Component {
+  state = { currentPage: 1, postsPerPage: 8 };
   componentDidMount() {
     this.props.fetchAnimeDetails();
   }
-
   render() {
     const { results, isLoading = true } = this.props.data;
-    console.log(isLoading);
+    const idxLastAnime = this.state.currentPage * this.state.postsPerPage;
+    const idxFirstAnime = idxLastAnime - this.state.postsPerPage;
+    const dispAnime = results.slice(idxFirstAnime, idxLastAnime);
+
+    const paginate = (pageNumber) =>
+      this.setState({
+        currentPage: pageNumber,
+        postsPerPage: this.state.postsPerPage,
+      });
+
     return (
       <>
         <div className="popular-anime pa2">
@@ -19,7 +29,7 @@ class Catalogue extends Component {
           <hr />
         </div>
         <div className="anime-grid pa4">
-          {results.map((anime) => {
+          {dispAnime.map((anime) => {
             //   console.log("---->" + animeImage);
             return (
               <article className="mw5 center bg-white br3 mv3 ba b--black-10 grow grid-items pointer">
@@ -46,6 +56,12 @@ class Catalogue extends Component {
             />
           </div>
         </div>
+
+        <Pagination
+          postsPerPage={this.state.postsPerPage}
+          totalPosts={results.length}
+          paginate={paginate}
+        />
       </>
     );
   }
