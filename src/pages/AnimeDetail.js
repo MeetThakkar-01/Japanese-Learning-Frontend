@@ -160,6 +160,7 @@ class AnimeDetail extends Component {
                   height="200px"
                   colors={["#0b0", "#666"]}
                   data={reportData[0]}
+                  xtitle="Label 1"
                 />
 
                 <ColumnChart
@@ -167,6 +168,7 @@ class AnimeDetail extends Component {
                   height="200px"
                   colors={["#00b", "#444"]}
                   data={reportData[1]}
+                  xtitle="Label 2"
                 />
 
                 <ColumnChart
@@ -174,6 +176,7 @@ class AnimeDetail extends Component {
                   height="200px"
                   colors={["#b00", "#666"]}
                   data={reportData[2]}
+                  xtitle="Label 3"
                 />
               </div>
               <h3 className="section-header">Episodes</h3>
