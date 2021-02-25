@@ -60,7 +60,7 @@ export class GoogleAuth extends Component {
     } else {
       return (
         <button
-          className="ui red google button"
+          className="ui red google button "
           onClick={this.handleSignInClick}
         >
           <i className="google icon"></i>

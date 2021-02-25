@@ -8,25 +8,81 @@ import "chart.js";
 import ReactStars from "react-rating-stars-component";
 
 class AnimeDetail extends Component {
+  state = {
+    reportData: [
+      [
+        ["Sun", 32],
+        ["Mon", 46],
+        ["Tue", 28],
+        ["wed", 28],
+        ["thurs", 28],
+        ["fri", 28],
+      ],
+      [
+        ["Sun", 25],
+        ["Mon", 12],
+        ["Tue", 46],
+        ["wed", 33],
+        ["thurs", 47],
+        ["fri", 69],
+      ],
+      [
+        ["Sun", 26],
+        ["Mon", 37],
+        ["Tue", 78],
+        ["wed", 96],
+        ["thurs", 45],
+        ["fri", 83],
+      ],
+    ],
+  };
   componentDidMount() {
     this.props.fetchAnimeDetails();
   }
   render() {
     const { results, isLoading = true } = this.props.data;
     const currentId = this.props.match.params.animeId;
+    const reportData = this.state.reportData;
+
     const ratingChanged = (newRating) => {
       console.log(newRating);
     };
     const anime = results.filter((item) => {
       return item._id === currentId;
     });
+    const setReport = (data) => {
+      this.setState({ reportData: data });
+    };
     const getEpisodes = (episodes) => {
       let content = [];
       for (let i = 0; i < episodes; i++) {
         content.push(
           <article className="mw5 center bg-white br3 mv3 b--black-10 grid-items pointer">
             <strong>
-              <p className="center f4 tc pt1 strong blue">Episode {i + 1}</p>
+              <p
+                className="center f4 tc pt1 strong blue"
+                onClick={() =>
+                  setReport([
+                    [
+                      ["test " + (i + 1), (i + 1) * 10],
+                      ["test " + (i + 2), (i + 1) * 20],
+                      ["test " + (i + 3), (i + 1) * 30],
+                    ],
+                    [
+                      ["test " + (i + 1), (i + 1) * 40],
+                      ["test " + (i + 2), (i + 1) * 50],
+                      ["test " + (i + 3), (i + 1) * 60],
+                    ],
+                    [
+                      ["test " + (i + 1), (i + 1) * 70],
+                      ["test " + (i + 2), (i + 1) * 80],
+                      ["test " + (i + 3), (i + 1) * 90],
+                    ],
+                  ])
+                }
+              >
+                Episode {i + 1}
+              </p>
             </strong>
           </article>
         );
@@ -103,42 +159,21 @@ class AnimeDetail extends Component {
                   width="200px"
                   height="200px"
                   colors={["#0b0", "#666"]}
-                  data={[
-                    ["Sun", 32],
-                    ["Mon", 46],
-                    ["Tue", 28],
-                    ["wed", 28],
-                    ["thurs", 28],
-                    ["fri", 28],
-                  ]}
+                  data={reportData[0]}
                 />
 
                 <ColumnChart
                   width="200px"
                   height="200px"
                   colors={["#00b", "#444"]}
-                  data={[
-                    ["Sun", 32],
-                    ["Mon", 46],
-                    ["Tue", 28],
-                    ["wed", 28],
-                    ["thurs", 28],
-                    ["fri", 28],
-                  ]}
+                  data={reportData[1]}
                 />
 
                 <ColumnChart
                   width="200px"
                   height="200px"
                   colors={["#b00", "#666"]}
-                  data={[
-                    ["Sun", 32],
-                    ["Mon", 46],
-                    ["Tue", 28],
-                    ["wed", 28],
-                    ["thurs", 28],
-                    ["fri", 28],
-                  ]}
+                  data={reportData[2]}
                 />
               </div>
               <h3 className="section-header">Episodes</h3>
