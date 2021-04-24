@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { signIn, signOut } from "../actions";
+import Strapi from "strapi-sdk-javascript";
+
+const strapi = new Strapi("http://localhost:1337");
 
 export class GoogleAuth extends Component {
   componentDidMount() {
@@ -20,13 +23,18 @@ export class GoogleAuth extends Component {
         });
     });
   }
+  createUser = async () => {
+    const user = strapi.createEntry("learners", { UserId: this.props.userid });
+    console.log("user", user);
+  };
   onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
       this.props.signIn(this.auth.currentUser.get().getId());
     } else this.props.signOut();
   };
-  handleSignInClick = () => {
+  handleSignInClick = async () => {
     this.auth.signIn();
+    this.createUser();
   };
   handleSignOutClick = () => {
     this.auth.signOut();

@@ -1,6 +1,29 @@
 import React from "react";
+import mongoose from "mongoose";
+import ProfileDetails from "./ProfileModel";
 
-export default function Profile() {
+export default async function Profile() {
+  const mongoURI =
+    "mongodb://meet:meet%40123@japanese-learning-app-shard-00-00.dcohe.mongodb.net:27017,japanese-learning-app-shard-00-01.dcohe.mongodb.net:27017,japanese-learning-app-shard-00-02.dcohe.mongodb.net:27017/Japanese-Learning-App?ssl=true&replicaSet=atlas-veelpm-shard-0&authSource=admin&retryWrites=true&w=majority";
+  await mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  });
+  const postChanges = (userId, userName, FullName) => {
+    const users = mongoose.model("ProfileDetails");
+
+    const newUser = new ProfileDetails();
+    newUser.ProfileDetails.push({
+      userId: userId,
+      FullName: FullName,
+      userName: userName,
+    });
+    newUser.save((err) => {
+      if (err) console.log(err);
+    });
+  };
   return (
     <div className="flex flex-wrap items-center justify-center pa3">
       <div class="center bg-white br3 pa3 pa4-ns mv3 w-50 w-auto-m">

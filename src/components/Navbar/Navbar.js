@@ -20,6 +20,13 @@ export default function Navbar({ auth, toggleSidebar, isOpen }) {
         </div>
         <div className="flex items-center justify-end">
           <PageLinks styleClass="nav-links"></PageLinks>
+          <ul className="page-links nav-links">
+            <li>
+              <a href="https://forum-japanese.eastus.cloudapp.azure.com/">
+                Forum
+              </a>
+            </li>
+          </ul>
           <div className="gAuth">
             <GoogleAuth />
           </div>

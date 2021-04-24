@@ -15,6 +15,7 @@
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
     "firebase": "^8.1.1",
+    "mongoose": "^5.12.2",
     "react": "^17.0.1",
     "react-chartkick": "^0.4.1",
     "react-dom": "^17.0.1",
@@ -29,6 +30,7 @@
     "react-sticky-footer": "0.1.0-rc3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "strapi-sdk-javascript": "^0.3.3",
     "tachyons": "^4.12.0",
     "web-vitals": "^0.2.4"
   },

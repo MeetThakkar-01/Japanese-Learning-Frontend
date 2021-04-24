@@ -3,9 +3,10 @@ import "./AnimeDetail.css";
 import { connect } from "react-redux";
 import { fetchAnimeDetails } from "../actions/index";
 import Loader from "../images/Loader.gif";
-import { ColumnChart } from "react-chartkick";
+import { ColumnChart, BarChart } from "react-chartkick";
 import "chart.js";
 import ReactStars from "react-rating-stars-component";
+// import { BarChart } from "@material-ui/icons";
 
 class AnimeDetail extends Component {
   state = {
@@ -113,7 +114,9 @@ class AnimeDetail extends Component {
                   <span className="bold">Ratings: </span>
                   <ReactStars
                     count={5}
+                    value={2}
                     onChange={ratingChanged}
+                    isHalf={true}
                     size={24}
                     activeColor="#ffd700"
                   />
@@ -154,15 +157,16 @@ class AnimeDetail extends Component {
               "Humans and demons are two sides of the same coin, as are Assiah and Gehenna, their respective worlds. The only way to travel between the realms is by the means of possession, like in ghost stories. However, Satan, the ruler of Gehenna, cannot find a suitable host to possess and therefore, remains imprisoned in his world. In a desperate attempt to conquer Assiah, he sends his son instead, intending for him to eventually grow into a vessel capable of possession by the demon king. Ao no Exorcist follows Rin Okumura who appears to be an ordinary, somewhat troublesome teenager—that is until one day he is ambushed by demons. His world turns upside down when he discovers that he is in fact the very son of Satan and that his demon father wishes for him to return so they can conquer Assiah together. Not wanting to join the king of Gehenna, Rin decides to begin training to become an exorcist so that he can fight to defend Assiah alongside his brother Yukio. [Written by MAL Rewrite]"
             } */}
               <h3 className="section-header">Stats</h3>
+
               <div className="flex flex-wrap chart justify-around">
-                <ColumnChart
+                <BarChart
+                  // height="200px"
                   width="200px"
                   height="200px"
-                  colors={["#0b0", "#666"]}
+                  colors={["#00b", "#444"]}
                   data={reportData[0]}
-                  xtitle="Label 1"
+                  xtitle="Label 2"
                 />
-
                 <ColumnChart
                   width="200px"
                   height="200px"
