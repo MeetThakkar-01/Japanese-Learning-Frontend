@@ -3,7 +3,7 @@ import "./AnimeDetail.css";
 import { connect } from "react-redux";
 import { fetchAnimeDetails } from "../actions/index";
 import Loader from "../images/Loader.gif";
-import { ColumnChart } from "react-chartkick";
+import { PieChart, BarChart } from "react-chartkick";
 import "chart.js";
 import ReactStars from "react-rating-stars-component";
 
@@ -11,28 +11,18 @@ class AnimeDetail extends Component {
   state = {
     reportData: [
       [
-        ["Sun", 32],
-        ["Mon", 46],
-        ["Tue", 28],
-        ["wed", 28],
-        ["thurs", 28],
-        ["fri", 28],
+        ["Length (in words)", 1184],
+        ["Unique words", 432],
+        ["Unique words (used once)", 258],
+        ["Unique kanji", 244],
       ],
       [
-        ["Sun", 25],
-        ["Mon", 12],
-        ["Tue", 46],
-        ["wed", 33],
-        ["thurs", 47],
-        ["fri", 69],
+        ["Words (per minute)", 432],
+        ["Unique words (per minute)", 17.8],
       ],
       [
-        ["Sun", 26],
-        ["Mon", 37],
-        ["Tue", 78],
-        ["wed", 96],
-        ["thurs", 45],
-        ["fri", 83],
+        ["Unique words (used once %)", 59],
+        ["Unique words (used multiple times %)", 100 - 59],
       ],
     ],
   };
@@ -48,7 +38,7 @@ class AnimeDetail extends Component {
       console.log(newRating);
     };
     const anime = results.filter((item) => {
-      return item._id === currentId;
+      return String(item.mal_id) === String(currentId);
     });
     const setReport = (data) => {
       this.setState({ reportData: data });
@@ -96,14 +86,19 @@ class AnimeDetail extends Component {
           <div className="container">
             <div className="information-container">
               <div className="image-container">
-                <img src={anime[0].imageUrl} alt="anime" />
+                <img
+                  src={
+                    "https://cdn.myanimelist.net/images/anime/1900/110097.jpg"
+                  }
+                  alt="anime"
+                />
               </div>
 
               <h3 className="section-header">Title</h3>
               <ul>
                 <li>
                   {/* <span className="bold">English: </span> */}
-                  <strong>{anime[0].animeName}</strong>
+                  <strong>{anime[0].anime_name}</strong>
                 </li>
               </ul>
 
@@ -120,13 +115,13 @@ class AnimeDetail extends Component {
                 </li>
                 <li>
                   <span className="bold">Episodes: </span>
-                  <strong>{anime[0].episodes}</strong>
+                  <strong>{"anime[0].episodes"}</strong>
                 </li>
                 <li>
                   <span className="bold">MAL Link: </span>
                   {
                     <a
-                      href={"https://myanimelist.net/anime/" + anime[0].idMAL}
+                      href={"https://myanimelist.net/anime/" + anime[0].mal_id}
                       target=" "
                     >
                       <strong>Click Here</strong>
@@ -154,32 +149,35 @@ class AnimeDetail extends Component {
               "Humans and demons are two sides of the same coin, as are Assiah and Gehenna, their respective worlds. The only way to travel between the realms is by the means of possession, like in ghost stories. However, Satan, the ruler of Gehenna, cannot find a suitable host to possess and therefore, remains imprisoned in his world. In a desperate attempt to conquer Assiah, he sends his son instead, intending for him to eventually grow into a vessel capable of possession by the demon king. Ao no Exorcist follows Rin Okumura who appears to be an ordinary, somewhat troublesome teenager—that is until one day he is ambushed by demons. His world turns upside down when he discovers that he is in fact the very son of Satan and that his demon father wishes for him to return so they can conquer Assiah together. Not wanting to join the king of Gehenna, Rin decides to begin training to become an exorcist so that he can fight to defend Assiah alongside his brother Yukio. [Written by MAL Rewrite]"
             } */}
               <h3 className="section-header">Stats</h3>
-              <div className="flex flex-wrap chart justify-around">
-                <ColumnChart
-                  width="200px"
-                  height="200px"
+              <div className="flex flex-wrap chart justify-center items-center">
+                <BarChart
+                  width="400px"
+                  // height="300px"
                   colors={["#0b0", "#666"]}
                   data={reportData[0]}
-                  xtitle="Label 1"
+                  xtitle="Words Count"
+                  download={true}
                 />
-
-                <ColumnChart
-                  width="200px"
-                  height="200px"
+                <BarChart
+                  width="402px"
+                  // height="200px"
                   colors={["#00b", "#444"]}
                   data={reportData[1]}
-                  xtitle="Label 2"
+                  xtitle="Words Per Minute"
+                  download={true}
                 />
-
-                <ColumnChart
-                  width="200px"
-                  height="200px"
+                <div className="h4"></div>
+                <PieChart
+                  // width="20px"
+                  // height="250px"
                   colors={["#b00", "#666"]}
                   data={reportData[2]}
-                  xtitle="Label 3"
+                  label="Unique Words %"
+                  download={true}
+                  donut={true}
                 />
               </div>
-              <h3 className="section-header">Episodes</h3>
+              <h3 className="section-header">People Also Watch</h3>
               <div className="anime-grid">{getEpisodes(anime[0].episodes)}</div>
             </div>
           </div>

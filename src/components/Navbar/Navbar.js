@@ -3,7 +3,6 @@ import React from "react";
 import PageLinks from "../../constants/links";
 import { FaAlignRight } from "react-icons/fa";
 import "./Navbar.css";
-import GoogleAuth from "../GoogleAuth";
 
 export default function Navbar({ auth, toggleSidebar, isOpen }) {
   return (
@@ -11,18 +10,22 @@ export default function Navbar({ auth, toggleSidebar, isOpen }) {
       <div className="nav-center">
         <div className="nav-header">
           <div className="logo">AnimeList</div>
-          <div className="gAuthphone">
-            <GoogleAuth />
-          </div>
           <button type="button" className="toggle-btn" onClick={toggleSidebar}>
             <FaAlignRight></FaAlignRight>
           </button>
         </div>
         <div className="flex items-center justify-end">
           <PageLinks styleClass="nav-links"></PageLinks>
-          <div className="gAuth">
+          <ul>
+            <li className="nav-links page-links">
+              <a href="https://forum-japanese.eastus.cloudapp.azure.com/">
+                Forum
+              </a>
+            </li>
+          </ul>
+          {/* <div className="gAuth">
             <GoogleAuth />
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
