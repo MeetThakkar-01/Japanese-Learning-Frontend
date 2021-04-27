@@ -36,9 +36,7 @@ class Catalogue extends Component {
                 <Link to={"/anime/" + anime.mal_id} key={anime.mal_id}>
                   <div className="anime-img">
                     <img
-                      src={
-                        "https://cdn.myanimelist.net/images/anime/1900/110097.jpg"
-                      }
+                      src={anime.image_url}
                       alt=""
                       height="250px"
                       width="auto"

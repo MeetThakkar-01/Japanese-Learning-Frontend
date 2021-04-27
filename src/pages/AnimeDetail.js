@@ -6,33 +6,46 @@ import Loader from "../images/Loader.gif";
 import { PieChart, BarChart } from "react-chartkick";
 import "chart.js";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class AnimeDetail extends Component {
-  state = {
-    reportData: [
-      [
-        ["Length (in words)", 1184],
-        ["Unique words", 432],
-        ["Unique words (used once)", 258],
-        ["Unique kanji", 244],
-      ],
-      [
-        ["Words (per minute)", 432],
-        ["Unique words (per minute)", 17.8],
-      ],
-      [
-        ["Unique words (used once %)", 59],
-        ["Unique words (used multiple times %)", 100 - 59],
-      ],
-    ],
+  constructor(props) {
+    //fixed
+    super(props); //fixed
+    this.state = {
+      reportData: {},
+      AnimeRecommendations: {},
+      Difficulty: "",
+    };
+  }
+
+  fetchAnime = async (mal_id) => {
+    const searchUrl = `https://animereport.herokuapp.com/api/data/` + mal_id;
+    const res = await axios.get(searchUrl);
+    let detail = { ...this.state.AnimeDetail };
+    let report = { ...this.state.reportData };
+    // let Difficulty = { ...this.state.Difficulty };
+    report = { ...res.data.stats };
+    detail = { ...res.data.recommendations };
+    // Difficulty = { ...res.data.stats.Difficulty };
+    this.setState({ AnimeRecommendations: detail });
+    this.setState({ reportData: report });
+    this.setState({ Difficulty: res.data.stats.Difficulty });
+    // console.log(this.state.Difficulty, "0000000000");
+    // console.log(
+    //   parseFloat(this.state.reportData["Difficulty"].split("/")[0] / 2.0),
+    //   "abcdefg"
+    // );
   };
+
   componentDidMount() {
+    this.fetchAnime(this.props.match.params.animeId);
     this.props.fetchAnimeDetails();
   }
   render() {
     const { results, isLoading = true } = this.props.data;
     const currentId = this.props.match.params.animeId;
-    const reportData = this.state.reportData;
 
     const ratingChanged = (newRating) => {
       console.log(newRating);
@@ -40,45 +53,13 @@ class AnimeDetail extends Component {
     const anime = results.filter((item) => {
       return String(item.mal_id) === String(currentId);
     });
-    const setReport = (data) => {
-      this.setState({ reportData: data });
-    };
-    const getEpisodes = (episodes) => {
-      let content = [];
-      for (let i = 0; i < episodes; i++) {
-        content.push(
-          <article className="mw5 center bg-white br3 mv3 b--black-10 grid-items pointer">
-            <strong>
-              <p
-                className="center f4 tc pt1 strong blue"
-                onClick={() =>
-                  setReport([
-                    [
-                      ["test " + (i + 1), (i + 1) * 10],
-                      ["test " + (i + 2), (i + 1) * 20],
-                      ["test " + (i + 3), (i + 1) * 30],
-                    ],
-                    [
-                      ["test " + (i + 1), (i + 1) * 40],
-                      ["test " + (i + 2), (i + 1) * 50],
-                      ["test " + (i + 3), (i + 1) * 60],
-                    ],
-                    [
-                      ["test " + (i + 1), (i + 1) * 70],
-                      ["test " + (i + 2), (i + 1) * 80],
-                      ["test " + (i + 3), (i + 1) * 90],
-                    ],
-                  ])
-                }
-              >
-                Episode {i + 1}
-              </p>
-            </strong>
-          </article>
-        );
-      }
-      return content;
-    };
+    // const setReport = (data) => {
+    //   this.setState({ reportData: data });
+    // };
+    // const getRecommendations = (recommendations) => {
+    //   // let content = [];
+    //   // return content;
+    // };
     // console.log(isLoading);
     return (
       <div className="anime-information">
@@ -86,12 +67,7 @@ class AnimeDetail extends Component {
           <div className="container">
             <div className="information-container">
               <div className="image-container">
-                <img
-                  src={
-                    "https://cdn.myanimelist.net/images/anime/1900/110097.jpg"
-                  }
-                  alt="anime"
-                />
+                <img src={anime[0].image_url} alt="anime" />
               </div>
 
               <h3 className="section-header">Title</h3>
@@ -105,18 +81,51 @@ class AnimeDetail extends Component {
               <h3 className="section-header">Information</h3>
               <ul>
                 <li>
-                  <span className="bold">Ratings: </span>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    activeColor="#ffd700"
-                  />
+                  <span className="bold">Length (in words): </span>
+                  <strong>{this.state.reportData["Length (in words)"]}</strong>
                 </li>
                 <li>
+                  <span className="bold">Words (per minute): </span>
+                  <strong>{this.state.reportData["Words (per minute)"]}</strong>
+                </li>
+                <li>
+                  <span className="bold">Unique words: </span>
+                  <strong>{this.state.reportData["Unique words"]}</strong>
+                </li>
+                <li>
+                  <span className="bold">Unique words (used once): </span>
+                  <strong>{this.state.reportData["Unique words"]}</strong>
+                </li>
+                <li>
+                  <span className="bold">Unique words (used once %) </span>
+                  <strong>{this.state.reportData["Unique words"]}</strong>
+                </li>
+                <li>
+                  <span className="bold">Unique words (per minute): </span>
+                  <strong>{this.state.reportData["Unique words"]}</strong>
+                </li>
+                <li>
+                  <span className="bold">Unique kanji: </span>
+                  <strong>{this.state.reportData["Unique words"]}</strong>
+                </li>
+                <li>
+                  <span className="bold">Difficulty: </span>
+                  <ReactStars
+                    count={5}
+                    // onChange={ratingChanged}
+                    size={24}
+                    activeColor="#ffd700"
+                    isHalf={true}
+                    edit={false}
+                    value={
+                      parseFloat(this.state.Difficulty.split("/")[0]) / 2.0
+                    }
+                  />
+                </li>
+                {/* <li>
                   <span className="bold">Episodes: </span>
                   <strong>{"anime[0].episodes"}</strong>
-                </li>
+                </li> */}
                 <li>
                   <span className="bold">MAL Link: </span>
                   {
@@ -154,7 +163,18 @@ class AnimeDetail extends Component {
                   width="400px"
                   // height="300px"
                   colors={["#0b0", "#666"]}
-                  data={reportData[0]}
+                  data={[
+                    [
+                      "Length (in words)",
+                      this.state.reportData["Length (in words)"],
+                    ],
+                    ["Unique words", this.state.reportData["Unique words"]],
+                    [
+                      "Unique words (used once)",
+                      this.state.reportData["Unique words (used once)"],
+                    ],
+                    ["Unique kanji", this.state.reportData["Unique kanji"]],
+                  ]}
                   xtitle="Words Count"
                   download={true}
                 />
@@ -162,7 +182,16 @@ class AnimeDetail extends Component {
                   width="402px"
                   // height="200px"
                   colors={["#00b", "#444"]}
-                  data={reportData[1]}
+                  data={[
+                    [
+                      "Words (per minute)",
+                      this.state.reportData["Words (per minute)"],
+                    ],
+                    [
+                      "Unique words (per minute)",
+                      this.state.reportData["Unique words (per minute)"],
+                    ],
+                  ]}
                   xtitle="Words Per Minute"
                   download={true}
                 />
@@ -171,14 +200,51 @@ class AnimeDetail extends Component {
                   // width="20px"
                   // height="250px"
                   colors={["#b00", "#666"]}
-                  data={reportData[2]}
+                  data={[
+                    [
+                      "Unique words (used once %)",
+                      this.state.reportData["Unique words (used once %)"],
+                    ],
+                    [
+                      "Unique words (used multiple times %)",
+                      100 -
+                        parseInt(
+                          this.state.reportData["Unique words (used once %)"]
+                        ),
+                    ],
+                  ]}
                   label="Unique Words %"
                   download={true}
                   donut={true}
                 />
               </div>
               <h3 className="section-header">People Also Watch</h3>
-              <div className="anime-grid">{getEpisodes(anime[0].episodes)}</div>
+              <div className="anime-grid pa4">
+                {
+                  // recom = this.state.AnimeRecommendations;
+                  Object.keys(this.state.AnimeRecommendations).map((key) => {
+                    // console.log(recom[key], "ASDFGH");
+                    const recom = this.state.AnimeRecommendations;
+                    return (
+                      <article className="mw5 center bg-white br3 mv3 ba b--black-10 grow grid-items pointer">
+                        <Link to={"/anime/" + key} key={key} target="_blank">
+                          <div className="anime-img">
+                            <img
+                              src={recom[key].image_url}
+                              alt=""
+                              height="250px"
+                              width="auto"
+                            />
+                          </div>
+                          <p className="center f4 tc pt1 strong">
+                            {recom[key].anime_name}
+                          </p>
+                        </Link>
+                      </article>
+                    );
+                  })
+                }
+              </div>
             </div>
           </div>
         ) : (

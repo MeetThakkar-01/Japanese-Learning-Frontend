@@ -14,7 +14,7 @@ export const signOut = () => {
 };
 
 export const fetchAnimeDetails = () => async (dispatch) => {
-  const searchUrl = `http://animereport.herokuapp.com/api/data/animes`;
+  const searchUrl = `https://animereport.herokuapp.com/api/data/animes`;
   const res = await axios.get(searchUrl);
   dispatch({ type: "FETCH_DATA", payload: res.data });
 };

@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { fetchAnimeDetails } from "../../actions/index";
 import Loader from "../../images/Loader.gif";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 class PopularAnime extends React.Component {
   // fetchAnimeImg = async (id) => {
@@ -34,9 +33,7 @@ class PopularAnime extends React.Component {
                   <Link to={"/anime/" + anime.mal_id} key={anime.mal_id}>
                     <div className="anime-img">
                       <img
-                        src={
-                          "https://cdn.myanimelist.net/images/anime/1900/110097.jpg"
-                        }
+                        src={anime.image_url}
                         alt=""
                         height="250px"
                         width="auto"
